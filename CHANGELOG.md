@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.3.0
+
+1. Fix `resourcePatterns` for KoolReport page
+
 ## Version 1.2.0
 
 1. Fix the `settings()` function name

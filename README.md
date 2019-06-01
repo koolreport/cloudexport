@@ -4,6 +4,20 @@
 
 # Installation
 
-1. Download and unzip it
-2. Copy `cloudexport` folder into `koolreport\packages` folder
-3. All done!
+## By downloading .zip file
+
+1. [Download](https://www.koolreport.com/packages/cloudexport)
+2. Unzip the zip file
+3. Copy the folder `cloudexport` into `koolreport` folder so that look like below
+
+```bash
+koolreport
+├── core
+├── cloudexport
+```
+
+## By composer
+
+```
+composer require koolreport\cloudexport
+```

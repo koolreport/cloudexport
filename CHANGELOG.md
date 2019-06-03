@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.4.0
+
+1. Change README
+
 ## Version 1.3.0
 
 1. Fix `resourcePatterns` for KoolReport page

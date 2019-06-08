@@ -19,5 +19,5 @@ koolreport
 ## By composer
 
 ```
-composer require koolreport\cloudexport
+composer require koolreport/cloudexport
 ```

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a47f520125318fc09ca3f3cc3ce9c8a8",
+    "content-hash": "61cc7fc47e2ae52210b51a71304a0767",
     "packages": [
         {
             "name": "chromeheadlessio/php-client",
-            "version": "0.2.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromeheadlessio/php-client.git",
-                "reference": "e63c926834c8957be4cba28bed63515b2055e515"
+                "reference": "05a0c4b038c37107d4a3e22a871e4373f2c764cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/e63c926834c8957be4cba28bed63515b2055e515",
-                "reference": "e63c926834c8957be4cba28bed63515b2055e515",
+                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/05a0c4b038c37107d4a3e22a871e4373f2c764cd",
+                "reference": "05a0c4b038c37107d4a3e22a871e4373f2c764cd",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "pdf export service",
                 "php client"
             ],
-            "time": "2019-02-01T10:22:31+00:00"
+            "time": "2019-08-14T03:58:57+00:00"
         }
     ],
     "packages-dev": [],

@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.5.1
+
+1. Change chromeheadlessio php-client version
+
 ## Version 1.5.0
 
 1. Change chromeheadlessio php-client version
@@ -24,4 +28,4 @@
 ## Version 1.0.0
 
 1. Build general structure to implement the cloud export service
-2. Provide connector to service of ChromeHeadless
+2. Provide connector to service of ChromeHeadlesscd

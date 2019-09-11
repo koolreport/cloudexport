@@ -52,4 +52,14 @@ class ServiceHub
     {
         return new ChromeHeadlessIoService($this->html, $authentication);
     }
+
+
+    public function khtml($authentication)
+    {
+        $service = new ChromeHeadlessIoService($this->html, $authentication);
+        $service->settings([
+            'engine' => 'wkhtmltopdf'
+        ]);
+        return $service;
+    }
 }

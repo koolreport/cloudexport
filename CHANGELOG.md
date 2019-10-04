@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 2.0.0
+
+1. Add wkhtmltopdf engine support
+
 ## Version 1.5.1
 
 1. Change chromeheadlessio php-client version

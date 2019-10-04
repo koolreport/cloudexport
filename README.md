@@ -72,6 +72,26 @@ $report->run()
 ->toBrowser("myreport.pdf");
 ```
 
+## Export engines
+
+ChromeHeadless.io has two pdf export engines which are headless chrome and wkhtmltopdf. Here's an example to use either of them:
+
+```
+$report->run()
+->cloudExport("MyReportPDF")
+->chromeHeadlessio("token-key")
+->pdf($chromePDFOptions)
+->toBrowser("myreport.pdf");
+
+$report->run()
+->cloudExport("MyReportPDF")
+->khtml("token-key")
+->pdf($khtmlPDFOption)
+->toBrowser("myreport.pdf");
+```
+
+Headless chrome has more features but wkhtmltopdf is faster for big files.
+
 ## Extra settings
 
 You may add some extra settings to guide ChromeHeadless.io to load your page.
@@ -96,7 +116,7 @@ require_once "MyReport.php";
 
 ## Export options
 
-### PDF
+### PDF for headless chrome engine
 
 The `pdf()` method will help to generate pdf file. It takes an array as parameter defining options for your PDF. Below are available options.
 
@@ -114,6 +134,8 @@ The `pdf()` method will help to generate pdf file. It takes an array as paramete
 |`height`|string/number||Paper height, accepts values labeled with units.|
 |`margin`|object||Paper margins, defaults to none. It has 4 sub properties: `top`, `right`, `bottom`, `left` which can take number or string with units|
 
+All options could be found at this link [Headless Chrome pdf options](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagepdfoptions)
+
 __Example:__
 
 ```
@@ -126,9 +148,26 @@ __Example:__
 ...
 ```
 
-### PDF options in view file
+### PDF for wkhtmltopdf engine
 
-Some options could be set directly in the PDF view file instead of pdf() method.
+All options could be found at this link, section Global Options [Wkhtmltopdf Docs](https://wkhtmltopdf.org/usage/wkhtmltopdf.txt)
+
+__Example:__
+
+```
+...
+->pdf([
+    "--collate"=>true,
+    "--page-size"=>"A4",
+    "--orientation"=>"Landscape",
+    "--margin-top"=>"100px"
+])
+...
+```
+
+### PDF options in view file for both headless chrome and wkhtmltopdf engines
+
+Some pdf options could be set directly in the PDF view file instead of pdf() method.
 
 #### header and footer
 
@@ -137,6 +176,7 @@ In the view file, use header and footer tags to set pdf's header and footer temp
 __Example:__
 
 ```
+<!-- Headless chrome pdf template -->
 <header>
     <div id="header-template" 
         style="font-size:10px !important; color:#808080; padding-left:10px">
@@ -154,7 +194,21 @@ __Example:__
 ...
 </footer>
 ```
-if either header or footer tag exists, pdf options' displayHeaderFooter will be true. PDF options' headerTemplate and footerTemplate options take priority over view file's header and footer tags. With header and footer tags, if there's no font-size style, a default style "font-size:10x" is used. Header and footer tags supports place holders like {date}, {title}, etc and img tag with link-type src. For img tag pdf options' headerTemplate and footerTemplate only support base64-type src.
+Headless chrome: If either header or footer tag exists, pdf options' displayHeaderFooter will be true. PDF options' headerTemplate and footerTemplate options take priority over view file's header and footer tags. With header and footer tags, if there's no font-size style, a default style "font-size:10x" is used. Header and footer tags supports place holders like {date}, {title}, etc and img tag with link-type src. For img tag pdf options' headerTemplate and footerTemplate only support base64-type src.
+
+```
+<!-- Wkhtmltopdf pdf template -->
+<header>
+    <div>
+        {page}{frompage}{topage}{webpage}{section}{subsection}{date}{isodate}{time}{title}{doctitle}{sitepage}{sitepages}
+    </div>
+</header>
+<footer>
+...
+</footer>
+```
+
+Wkhtmltopdf: The exact html content of the header and footer tags including img tags will be used as pdf header and footer with some substituted variables.
 
 #### margin
 
@@ -169,11 +223,22 @@ __Example:__
 </body>
 
 ```
-If either header or footer tag exists but there's no body's margin, a default margin of 1 inch will be used
+If either header or footer tag exists but there's no body's margin top or bottom, a default margin top or bottom of 1 inch will be used
 
+#### No template option
 
+If you don't have any header/footer/margin in your template files, you could speed up pdf generating with `noTemplateOption` property:
 
-### JPG
+```
+...
+->pdf([
+    "noTemplateOption"=>true,
+    ...
+])
+...
+```
+
+### JPG for headless chrome
 
 The `jpg()` help to generate JPG file. It take an array as parameter defining options for your JPG. Below are list of properties:
 
@@ -202,7 +267,7 @@ __Example:__
 ```
 
 
-### PNG
+### PNG for headless chrome
 
 The `png()` help to generate PNG file. It take an array as parameter defining options for your PNG. Below are list of properties:
 

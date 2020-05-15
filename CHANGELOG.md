@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 2.1.1
+
+1. Update chromeheadlessio/php-client version
+
 ## Version 2.1.0
 
 1. Update chromeheadlessio/php-client version

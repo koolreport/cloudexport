@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 3.0.0
+
+1. add phantomjs engine support
+
 ## Version 2.1.1
 
 1. Update chromeheadlessio/php-client version

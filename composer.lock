@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "49f4518744eedbb256c31b9196421d3a",
+    "content-hash": "86e9b8ace69091bc1b0ed1316b831686",
     "packages": [
         {
             "name": "chromeheadlessio/php-client",
-            "version": "0.4.0",
+            "version": "0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromeheadlessio/php-client.git",
-                "reference": "cc202cf06463344fe76599fec6bbf794567c41fc"
+                "reference": "1c74e2c446a261a9803ada60f9784c333469137b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/cc202cf06463344fe76599fec6bbf794567c41fc",
-                "reference": "cc202cf06463344fe76599fec6bbf794567c41fc",
+                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/1c74e2c446a261a9803ada60f9784c333469137b",
+                "reference": "1c74e2c446a261a9803ada60f9784c333469137b",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "pdf export service",
                 "php client"
             ],
-            "time": "2019-09-11T09:57:24+00:00"
+            "time": "2020-06-22T04:49:24+00:00"
         }
     ],
     "packages-dev": [],

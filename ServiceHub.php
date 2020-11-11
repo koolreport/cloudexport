@@ -62,4 +62,13 @@ class ServiceHub
         ]);
         return $service;
     }
+
+    public function phantomjs($authentication)
+    {
+        $service = new ChromeHeadlessIoService($this->html, $authentication);
+        $service->settings([
+            'engine' => 'phantomjs'
+        ]);
+        return $service;
+    }
 }

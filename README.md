@@ -74,7 +74,7 @@ $report->run()
 
 ## Export engines
 
-ChromeHeadless.io has two pdf export engines which are headless chrome and wkhtmltopdf. Here's an example to use either of them:
+ChromeHeadless.io has three pdf export engines which are headless chrome, wkhtmltopdf, and phantomjs. Here're examples to use them:
 
 ```
 $report->run()
@@ -88,9 +88,15 @@ $report->run()
 ->khtml("token-key")
 ->pdf($khtmlPDFOption)
 ->toBrowser("myreport.pdf");
+
+$report->run()
+->cloudExport("MyReportPDF")
+->phantomjs("token-key")
+->pdf($phantomjsPDFOption)
+->toBrowser("myreport.pdf");
 ```
 
-Headless chrome has more features but wkhtmltopdf is faster for big files.
+Headless chrome has more features but wkhtmltopdf is faster for big files. Phantomjs has the advantage of header and footer callbacks which allow for custom header/footer for each page.
 
 ## Extra settings
 

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef7d19ae5a95f032d695e45b22283d1d",
+    "content-hash": "b356804d63b3783653c22593bf11259a",
     "packages": [
         {
             "name": "chromeheadlessio/php-client",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromeheadlessio/php-client.git",
-                "reference": "ceda0d8967525c29988e2270c1150bbcb042c73c"
+                "reference": "2c14be7ff6f036a4d1641ab7d822dc6991043390"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/ceda0d8967525c29988e2270c1150bbcb042c73c",
-                "reference": "ceda0d8967525c29988e2270c1150bbcb042c73c",
+                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/2c14be7ff6f036a4d1641ab7d822dc6991043390",
+                "reference": "2c14be7ff6f036a4d1641ab7d822dc6991043390",
                 "shasum": ""
             },
             "require": {
@@ -47,9 +47,9 @@
             ],
             "support": {
                 "issues": "https://github.com/chromeheadlessio/php-client/issues",
-                "source": "https://github.com/chromeheadlessio/php-client/tree/v1.0.0"
+                "source": "https://github.com/chromeheadlessio/php-client/tree/v1.1.0"
             },
-            "time": "2020-11-10T08:49:01+00:00"
+            "time": "2021-05-31T03:46:08+00:00"
         }
     ],
     "packages-dev": [],

@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "chromeheadlessio/php-client",
-            "version": "0.3.1",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromeheadlessio/php-client.git",
-                "reference": "05a0c4b038c37107d4a3e22a871e4373f2c764cd"
+                "reference": "6d86c266b64f6f38dc48f0bea02652deecfe63a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/05a0c4b038c37107d4a3e22a871e4373f2c764cd",
-                "reference": "05a0c4b038c37107d4a3e22a871e4373f2c764cd",
+                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/6d86c266b64f6f38dc48f0bea02652deecfe63a4",
+                "reference": "6d86c266b64f6f38dc48f0bea02652deecfe63a4",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,11 @@
                 "pdf export service",
                 "php client"
             ],
-            "time": "2019-08-14T03:58:57+00:00"
+            "support": {
+                "issues": "https://github.com/chromeheadlessio/php-client/issues",
+                "source": "https://github.com/chromeheadlessio/php-client/tree/v0.3.3"
+            },
+            "time": "2019-08-30T08:39:32+00:00"
         }
     ],
     "packages-dev": [],
@@ -55,5 +59,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

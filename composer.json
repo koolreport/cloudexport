@@ -5,7 +5,7 @@
     "keywords": ["PHP","Reporting Tools","Data Report","pdf export", "jpg png export", "cloud export service"],
     "homepage": "https://www.koolreport.com",
     "type": "library",
-    "license": "https://www.koolphp.net/license-agreement",
+    "license": "MIT",
     "require": {
         "chromeheadlessio/php-client": "0.2.*"
     }

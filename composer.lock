@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49f4518744eedbb256c31b9196421d3a",
+    "content-hash": "b26d53d715b42b6f583dca8453716a1f",
     "packages": [
         {
             "name": "chromeheadlessio/php-client",
-            "version": "0.4.0",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromeheadlessio/php-client.git",
-                "reference": "cc202cf06463344fe76599fec6bbf794567c41fc"
+                "reference": "e4b75e0741783172287b07a00ec61a8595b44c9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/cc202cf06463344fe76599fec6bbf794567c41fc",
-                "reference": "cc202cf06463344fe76599fec6bbf794567c41fc",
+                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/e4b75e0741783172287b07a00ec61a8595b44c9e",
+                "reference": "e4b75e0741783172287b07a00ec61a8595b44c9e",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,11 @@
                 "pdf export service",
                 "php client"
             ],
-            "time": "2019-09-11T09:57:24+00:00"
+            "support": {
+                "issues": "https://github.com/chromeheadlessio/php-client/issues",
+                "source": "https://github.com/chromeheadlessio/php-client/tree/v0.6.0"
+            },
+            "time": "2020-05-15T08:34:09+00:00"
         }
     ],
     "packages-dev": [],
@@ -55,5 +59,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

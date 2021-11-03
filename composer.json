@@ -1,12 +1,12 @@
 {
     "name": "koolreport/cloudexport",
-    "version":"3.0.1",
+    "version":"3.0.2-dev",
     "description": "Export to pdf, image using chromeheadless.io's cloud export service",
     "keywords": ["PHP","Reporting Tools","Data Report","pdf export", "jpg png export", "cloud export service"],
     "homepage": "https://www.koolreport.com",
     "type": "library",
     "license": "MIT",
     "require": {
-        "chromeheadlessio/php-client": "^1.1.0"
+        "chromeheadlessio/php-client": "1.2.0"
     }
 }

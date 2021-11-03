@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 3.0.2-dev
+
+1. Update chromeheadlessio/php-client version to 1.2.0
+2. Make authentication token optional to work with local export server
+
 ## Version 3.0.1
 
 1. Update chromeheadlessio/php-client version

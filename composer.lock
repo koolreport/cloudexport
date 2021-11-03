@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b356804d63b3783653c22593bf11259a",
+    "content-hash": "e5e41534315c39a5234f5cb5ddd63bac",
     "packages": [
         {
             "name": "chromeheadlessio/php-client",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromeheadlessio/php-client.git",
-                "reference": "2c14be7ff6f036a4d1641ab7d822dc6991043390"
+                "reference": "b8488cd7f0f9fd4235031b6e2438cac0c8cf7d38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/2c14be7ff6f036a4d1641ab7d822dc6991043390",
-                "reference": "2c14be7ff6f036a4d1641ab7d822dc6991043390",
+                "url": "https://api.github.com/repos/chromeheadlessio/php-client/zipball/b8488cd7f0f9fd4235031b6e2438cac0c8cf7d38",
+                "reference": "b8488cd7f0f9fd4235031b6e2438cac0c8cf7d38",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "chromeheadlessio\\": "src"
+                    "chromeheadlessio\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -47,9 +47,9 @@
             ],
             "support": {
                 "issues": "https://github.com/chromeheadlessio/php-client/issues",
-                "source": "https://github.com/chromeheadlessio/php-client/tree/v1.1.0"
+                "source": "https://github.com/chromeheadlessio/php-client/tree/v1.2.0"
             },
-            "time": "2021-05-31T03:46:08+00:00"
+            "time": "2021-07-26T09:04:50+00:00"
         }
     ],
     "packages-dev": [],

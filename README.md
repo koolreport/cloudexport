@@ -103,21 +103,27 @@ Headless chrome has more features but wkhtmltopdf is faster for big files. Phant
 You may add some extra settings to guide ChromeHeadless.io to load your page.
 
 ```
-require_once "../koolreport/core/autoload.php";
-require_once "MyReport.php";
-
-...
+$report->run()
+->cloudExport("MyReportPDF")
 ->chromeHeadlessio("token-key")
 ->settings([
-    "waitUntil"=>"load"
+    "pageWaiting"=>"load", // load, domcontentloaded, networkidle0, networkidle2
+    "useLocalTempFolder" => true,
+    "autoDeleteLocalTempFile" => true,
+    "serviceHost" => "http://localhost:8000", // default value: https://service.chromeheadless.io
+    "serviceUrl" => "http://localhost:8000/api/export",
 ])
-...
+->pdf($chromePDFOptions)
+->toBrowser("myreport.pdf");
 ```
 
-|Name|Type|Default|Description|
-|---|---|---|---|
-|`timeout`|number|30|Maximum navigation time in milliseconds, defaults to 30 seconds, pass 0 to disable timeout.|
-|`waitUntil`|string|"load"|When to consider navigation succeeded. Other options are `"domcontentloaded"` page finished when all DOM is loaded; `"networkidle0"` page finished when there are no more than 0 network connections for at least 500 ms; `"networkidle2"` page finished when  there are no more than 2 network connections for at least 500 ms.|
+|Name|Type|Default|Description| Available since version |
+|---|---|---|---|---|
+|`pageWaiting`|string|"load"|When to consider navigation succeeded. Other options are `"domcontentloaded"` page finished when all DOM is loaded; `"networkidle0"` page finished when there are no more than 0 network connections for at least 500 ms; `"networkidle2"` page finished when  there are no more than 2 network connections for at least 500 ms.| 1.0.0 |
+|`useLocalTempFolder`|boolean|false| Use/create a local temporary directory instead of system temporary directory to store temporary export files | 1.0.0 |
+|`autoDeleteLocalTempFile`|boolean|false| Auto delete temporary export files after exporting | 1.0.0 |
+|`serviceHost`|string|https://service.chromeheadless.io| Choose KoolReport's cloud server or your local export server | 4.0.0 |
+|`serviceUrl`|string|{serviceHost}/api/export| To be used if you want another export route other than /api/export | 4.0.0 |
 
 
 ## Export options

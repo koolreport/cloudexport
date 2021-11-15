@@ -2,10 +2,9 @@
 
 ## Version 4.0.0
 
-1. Update chromeheadlessio/php-client version to 1.2.0
-2. Make authentication token optional to work with local export server
-3. Add `serviceHost` and `serviceUrl` settings for cloud export to work with local export server
-4. Update chromeheadlessio/php-client version
+1. Make authentication token optional to work with local export server
+2. Add `serviceHost` and `serviceUrl` settings for cloud export to work with local export server
+3. Update chromeheadlessio/php-client version
 
 ## Version 3.0.1
 

@@ -48,13 +48,13 @@ class ServiceHub
      * 
      * @return ChromeHeadlessIoService The ChromeHeadlessIo service object
      */
-    public function chromeHeadlessio($authentication)
+    public function chromeHeadlessio($authentication = "")
     {
         return new ChromeHeadlessIoService($this->html, $authentication);
     }
 
 
-    public function khtml($authentication)
+    public function khtml($authentication = "")
     {
         $service = new ChromeHeadlessIoService($this->html, $authentication);
         $service->settings([
@@ -63,7 +63,7 @@ class ServiceHub
         return $service;
     }
 
-    public function phantomjs($authentication)
+    public function phantomjs($authentication = "")
     {
         $service = new ChromeHeadlessIoService($this->html, $authentication);
         $service->settings([

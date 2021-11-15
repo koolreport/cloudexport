@@ -7,6 +7,6 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "chromeheadlessio/php-client": "1.2.0"
+        "chromeheadlessio/php-client": "1.3.0"
     }
 }

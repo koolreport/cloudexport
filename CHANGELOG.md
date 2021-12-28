@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 4.1.0-dev
+
+1. Add "serviceHost" argument to chromeheadless($token, $serviceHost), khtml($token, $serviceHost), phantomjs($token, $serviceHost) methods beside settings().
+
+
 ## Version 4.0.0
 
 1. Make authentication token optional to work with local export server

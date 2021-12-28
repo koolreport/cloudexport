@@ -48,26 +48,32 @@ class ServiceHub
      * 
      * @return ChromeHeadlessIoService The ChromeHeadlessIo service object
      */
-    public function chromeHeadlessio($authentication = "")
-    {
-        return new ChromeHeadlessIoService($this->html, $authentication);
-    }
-
-
-    public function khtml($authentication = "")
+    public function chromeHeadlessio($authentication = "", $serviceHost = null)
     {
         $service = new ChromeHeadlessIoService($this->html, $authentication);
         $service->settings([
-            'engine' => 'wkhtmltopdf'
+            'serviceHost' => $serviceHost
         ]);
         return $service;
     }
 
-    public function phantomjs($authentication = "")
+
+    public function khtml($authentication = "", $serviceHost = null)
     {
         $service = new ChromeHeadlessIoService($this->html, $authentication);
         $service->settings([
-            'engine' => 'phantomjs'
+            'engine' => 'wkhtmltopdf',
+            'serviceHost' => $serviceHost
+        ]);
+        return $service;
+    }
+
+    public function phantomjs($authentication = "", $serviceHost = null)
+    {
+        $service = new ChromeHeadlessIoService($this->html, $authentication);
+        $service->settings([
+            'engine' => 'phantomjs',
+            'serviceHost' => $serviceHost
         ]);
         return $service;
     }

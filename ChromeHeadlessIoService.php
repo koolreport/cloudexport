@@ -31,6 +31,8 @@ class ChromeHeadlessIoService
      */
     protected $settings;
 
+    protected $authentication;
+
     /**
      * Parameters for ChomeHeadless.io service
      * 

@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 4.1.1-dev
+1. Fix dynamic properties in PHP 8.2
+
 ## Version 4.1.0
 
 1. Add "serviceHost" argument to chromeheadless($token, $serviceHost), khtml($token, $serviceHost), phantomjs($token, $serviceHost) methods beside settings().

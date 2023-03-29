@@ -1,7 +1,8 @@
 # Change Log
 
-## Version 4.1.1-dev
+## Version 4.2.0
 1. Fix dynamic properties in PHP 8.2
+2. Update Chromeheadlessio's php-client library version.
 
 ## Version 4.1.0
 

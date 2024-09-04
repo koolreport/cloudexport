@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 4.2.1
+1. Remove outdated `FileHandler` class
+
 ## Version 4.2.0
 1. Fix dynamic properties in PHP 8.2
 2. Update Chromeheadlessio's php-client library version.

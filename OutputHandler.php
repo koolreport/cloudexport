@@ -52,6 +52,7 @@ use \koolreport\core\Utility;
         $dotpos =strrpos($filename, ".");
         $ext = strtolower(substr($filename, $dotpos+1));
         $map =array(
+            "json"=>"application/json",
             "pdf"=>"application/pdf",
             "png"=>"image/png",
             "jpg"=>"image/jpeg",

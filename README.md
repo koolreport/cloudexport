@@ -122,8 +122,129 @@ $report->run()
 |`pageWaiting`|string|"load"|When to consider navigation succeeded. Other options are `"domcontentloaded"` page finished when all DOM is loaded; `"networkidle0"` page finished when there are no more than 0 network connections for at least 500 ms; `"networkidle2"` page finished when  there are no more than 2 network connections for at least 500 ms.| 1.0.0 |
 |`useLocalTempFolder`|boolean|false| Use/create a local temporary directory instead of system temporary directory to store temporary export files | 1.0.0 |
 |`autoDeleteLocalTempFile`|boolean|false| Auto delete temporary export files after exporting | 1.0.0 |
-|`serviceHost`|string|https://service.chromeheadless.io| Choose KoolReport's cloud server or your local export server | 4.0.0 |
+|`serviceHost`|string|https://service.chromeheadless.io| Choose KoolReport's cloud server or your local export server. Point it at `https://service.chromeheadless.io/v2` for the version 2 service, see below | 4.0.0 |
 |`serviceUrl`|string|{serviceHost}/api/export| To be used if you want another export route other than /api/export | 4.0.0 |
+|`resourceCache`|array|not set| Resource cache. Omits assets already cached on the export server from the upload, sending a manifest instead. Requires `chromeheadlessio/php-client` 2.x; on the version 2 host it is then on by default. See below. | 4.3.0 |
+
+
+## Version 2 service host
+
+From version 5.0.0 there is a second service host at
+`https://service.chromeheadless.io/v2`, running an up-to-date Chromium engine
+with the security improvements that come with it. The version 1 host stays where
+it is and keeps working, so nothing breaks by leaving this alone.
+
+It is opt-in on purpose, and it stays the non-default for now. A newer Chromium
+renders slightly differently, so switching can move page breaks, font metrics
+and spacing in output you have already signed off on. Point a report at the
+version 2 host, compare the result against a known-good file, and move over when
+you are happy with it rather than having it change under you.
+
+There are two ways to select it. Pass it as the second argument of
+`chromeHeadlessio()`:
+
+```
+$report->run()
+->cloudExport("MyReportPDF")
+->chromeHeadlessio("token-key", "https://service.chromeheadless.io/v2")
+->pdf($chromePDFOptions)
+->toBrowser("myreport.pdf");
+```
+
+Or set it as a normal setting, which is the better spot if you are already
+passing a `settings()` block:
+
+```
+$report->run()
+->cloudExport("MyReportPDF")
+->chromeHeadlessio("token-key")
+->settings([
+    "serviceHost" => "https://service.chromeheadless.io/v2",
+])
+->pdf($chromePDFOptions)
+->toBrowser("myreport.pdf");
+```
+
+The two forms are equivalent; `chromeHeadlessio($token, $serviceHost)` just
+writes the same `serviceHost` setting for you. The same second argument works on
+`khtml()` and `phantomjs()`. The export route is derived from the host, so this
+resolves to `https://service.chromeheadless.io/v2/api/export` unless you also set
+`serviceUrl` explicitly. A trailing slash on the host is trimmed.
+
+What you get on the version 2 path depends on your client version, described next.
+
+
+## Resource cache
+
+Every export currently zips up and uploads all of the assets your page
+references — and for a KoolReport report that includes KoolReport's own library
+resources, the same js and css on every single request. From version 4.3.0,
+with `chromeheadlessio/php-client` 2.0.0 installed, the client can skip the ones
+it believes the export server already has and send a `resourceManifest` naming
+them instead.
+
+Whether this is on out of the box depends on both the client version and the
+service host, because the caching is client-side work that the server has to
+support:
+
+|  |version 1 host (default)|version 2 host|
+|---|---|---|
+|`php-client` 1.x|no caching|no caching|
+|`php-client` 2.x|off, opt in below|on by default, `cacheCustom` scope `global`|
+
+A 1.x client never sends a `resourceManifest` at all, so pointing it at the
+version 2 host gains you the newer engine and the server-side improvements but
+not the cache. Nothing is lost either; the request is the same one it always
+sent.
+
+With a 2.x client on the version 1 host the cache stays off unless you turn it
+on, and with it off — or when the export server does not advertise support —
+the request is byte-identical to before.
+
+With a 2.x client on the version 2 host both the resource cache and
+`cacheCustom` scope `global` are on by default. KoolReport's own library
+resources are the assets this was built for: they are identical across every
+install, so on that path they are uploaded once for the whole service rather
+than once per export. You do not need to write a `resourceCache` block to get
+this. Everything below is still available for overriding those defaults, and
+setting `"enabled" => false` opts back out.
+
+```
+$report->run()
+->cloudExport("MyReportPDF")
+->chromeHeadlessio("token-key")
+->settings([
+    "resourceCache" => [
+        "enabled"  => true,               // already true on the /v2 host
+        "cacheDir" => sys_get_temp_dir(), // must be writable; NOT the package folder
+    ],
+])
+->pdf($chromePDFOptions)
+->toBrowser("myreport.pdf");
+```
+
+|Name|Type|Default|Description|
+|---|---|---|---|
+|`enabled`|boolean|false, true on the v2 host| Turn the resource cache on. Nothing else in this block has any effect while this is false. Requires a 2.x client either way |
+|`cacheDir`|string|system temp dir| Where the client persists what it has learned. Must be writable, and must **not** be the package directory |
+|`sync`|boolean|true| Pull the shared hash list from the service so assets other installs have already uploaded can be skipped too |
+|`syncInterval`|number|86400| Seconds between those pulls. Off the hot path of an export |
+|`capabilityTtl`|number|300| Seconds to remember whether the server supports caching at all, so it is not re-probed on every export |
+|`cacheCustom`|array|not set, `["scope" => "global"]` on the v2 host| `["scope" => "tenant"]` binds your own custom assets to your token; `["scope" => "global"]` asks the service to share them, which it may decline |
+
+Two properties worth knowing, because they determine whether this is safe to
+turn on:
+
+**It cannot serve you the wrong bytes.** Whether an asset is skipped is decided
+by the sha256 of the actual local file. Patch a library asset locally and its
+hash simply stops matching, so it gets uploaded normally.
+
+**It cannot break an export.** If anything on the cache path goes wrong the
+client falls back to a plain full upload. If the server replies that some of the
+manifested assets are missing, the client re-sends once with those added back.
+
+Call `getWarnings()` on the service after exporting to see anything the server
+reported, such as being unable to promote custom resources to the shared pool.
 
 
 ## Export options

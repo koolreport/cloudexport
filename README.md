@@ -26,7 +26,7 @@ composer require koolreport/cloudexport
 
 ## Overview
 
-__ChomeHeadless.io__ is an online service helps to convert HTML to PDF and other image format. Running on highly optimized hardware and software, the ChomeHeadless.io will save your time in installing headless browsers like Phantomjs or Google Chrome. It also saves you server resources which you may reserve for other crucial tasks. The Chromeheadless.io is in beta version so all are free.
+ChomeHeadless.io is an online service helps to convert HTML to PDF and other image format. Running on highly optimized hardware and software, the ChomeHeadless.io will save your time in installing headless browsers like Phantomjs or Google Chrome. It also saves you server resources which you may reserve for other crucial tasks. The Chromeheadless.io is in beta version so all are free.
 
 ## Get Token Key
 
@@ -37,7 +37,7 @@ __ChomeHeadless.io__ is an online service helps to convert HTML to PDF and other
 
 ## Example
 
-__MyReport.php__
+MyReport.php
 
 ```
 class MyReport extends \koolreport\KoolReport
@@ -47,7 +47,7 @@ class MyReport extends \koolreport\KoolReport
 }
 ```
 
-__MyReportPDF.view.php__
+MyReportPDF.view.php
 
 ```html
 <html>
@@ -58,7 +58,7 @@ __MyReportPDF.view.php__
 </html>
 ```
 
-__index.php__
+index.php
 
 ```
 require_once "../koolreport/core/autoload.php";
@@ -124,7 +124,7 @@ $report->run()
 |`autoDeleteLocalTempFile`|boolean|false| Auto delete temporary export files after exporting | 1.0.0 |
 |`serviceHost`|string|https://service.chromeheadless.io| Choose KoolReport's cloud server or your local export server. Point it at `https://service.chromeheadless.io/v2` for the version 2 service, see below | 4.0.0 |
 |`serviceUrl`|string|{serviceHost}/api/export| To be used if you want another export route other than /api/export | 4.0.0 |
-|`resourceCache`|array|not set| Resource cache. Omits assets already cached on the export server from the upload, sending a manifest instead. Requires `chromeheadlessio/php-client` 2.x; on the version 2 host it is then on by default. See below. | 4.3.0 |
+|`resourceCache`|array|not set| Resource cache. Omits assets already cached on the export server from the upload, sending a manifest instead. Requires `chromeheadlessio/php-client` 2.1.0 or later; on the version 2 host (a service base ending in `/v2`) it is then on by default. See below. | 4.3.0 |
 
 
 ## Version 2 service host
@@ -190,7 +190,8 @@ support:
 |  |version 1 host (default)|version 2 host|
 |---|---|---|
 |`php-client` 1.x|no caching|no caching|
-|`php-client` 2.x|off, opt in below|on by default, `cacheCustom` scope `global`|
+|`php-client` 2.0.0|off, opt in below|off, opt in below|
+|`php-client` 2.1.0+|off, opt in below|on by default, `cacheCustom` scope `global`|
 
 A 1.x client never sends a `resourceManifest` at all, so pointing it at the
 version 2 host gains you the newer engine and the server-side improvements but
@@ -198,16 +199,19 @@ not the cache. Nothing is lost either; the request is the same one it always
 sent.
 
 With a 2.x client on the version 1 host the cache stays off unless you turn it
-on, and with it off — or when the export server does not advertise support —
-the request is byte-identical to before.
+on, and with it off, or when the export server does not advertise support, the
+request is byte-identical to before.
 
-With a 2.x client on the version 2 host both the resource cache and
-`cacheCustom` scope `global` are on by default. KoolReport's own library
-resources are the assets this was built for: they are identical across every
-install, so on that path they are uploaded once for the whole service rather
-than once per export. You do not need to write a `resourceCache` block to get
-this. Everything below is still available for overriding those defaults, and
-setting `"enabled" => false` opts back out.
+With a `chromeheadlessio/php-client` 2.1.0 or later client on the version 2
+host both the resource cache and `cacheCustom` scope `global` are on by
+default. The service base is resolved from the final export URL, so a base
+ending in `/v2` flips the default on, and setting only `serviceUrl` without
+`serviceHost` reaches the same `/v2` base and the same default. KoolReport's
+own library resources are the assets this was built for: they are identical
+across every install, so on that path they are uploaded once for the whole
+service rather than once per export. You do not need to write a `resourceCache`
+block to get this. Everything below is still available for overriding those
+defaults, and setting `"enabled" => false` opts back out.
 
 ```
 $report->run()
@@ -225,12 +229,12 @@ $report->run()
 
 |Name|Type|Default|Description|
 |---|---|---|---|
-|`enabled`|boolean|false, true on the v2 host| Turn the resource cache on. Nothing else in this block has any effect while this is false. Requires a 2.x client either way |
+|`enabled`|boolean|false, true on the v2 host with php-client 2.1.0+| Turn the resource cache on. Nothing else in this block has any effect while this is false. Requires a 2.x client either way |
 |`cacheDir`|string|system temp dir| Where the client persists what it has learned. Must be writable, and must **not** be the package directory |
 |`sync`|boolean|true| Pull the shared hash list from the service so assets other installs have already uploaded can be skipped too |
 |`syncInterval`|number|86400| Seconds between those pulls. Off the hot path of an export |
 |`capabilityTtl`|number|300| Seconds to remember whether the server supports caching at all, so it is not re-probed on every export |
-|`cacheCustom`|array|not set, `["scope" => "global"]` on the v2 host| `["scope" => "tenant"]` binds your own custom assets to your token; `["scope" => "global"]` asks the service to share them, which it may decline |
+|`cacheCustom`|array|not set, `["scope" => "global"]` whenever caching is active| `["scope" => "tenant"]` binds your own custom assets to your token; `["scope" => "global"]` asks the service to share them, which it may decline |
 
 Two properties worth knowing, because they determine whether this is safe to
 turn on:
@@ -269,7 +273,7 @@ The `pdf()` method will help to generate pdf file. It takes an array as paramete
 
 All options could be found at this link [Headless Chrome pdf options](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagepdfoptions)
 
-__Example:__
+Example:
 
 ```
 ...
@@ -285,7 +289,7 @@ __Example:__
 
 All options could be found at this link, section Global Options [Wkhtmltopdf Docs](https://wkhtmltopdf.org/usage/wkhtmltopdf.txt)
 
-__Example:__
+Example:
 
 ```
 ...
@@ -306,7 +310,7 @@ Some pdf options could be set directly in the PDF view file instead of pdf() met
 
 In the view file, use header and footer tags to set pdf's header and footer template:
 
-__Example:__
+Example:
 
 ```
 <!-- Headless chrome pdf template -->
@@ -347,7 +351,7 @@ Wkhtmltopdf: The exact html content of the header and footer tags including img 
 
 In the view file, use the body tag's margin style to set pdf margin:
 
-__Example:__
+Example:
 
 ```
 //MyReportPDF.view.php
@@ -383,7 +387,7 @@ The `jpg()` help to generate JPG file. It take an array as parameter defining op
 |`omitBackground`|bool|false|Hides default white background and allows capturing screenshots with transparency. |
 |`encoding`|string|"binary"|The encoding of the image, can be either `base64` or `binary`|
 
-__Example:__
+Example:
 
 ```
 ...
@@ -411,7 +415,7 @@ The `png()` help to generate PNG file. It take an array as parameter defining op
 |`omitBackground`|bool|false|Hides default white background and allows capturing screenshots with transparency. |
 |`encoding`|string|"binary"|The encoding of the image, can be either `base64` or `binary`|
 
-__Example:__
+Example:
 
 ```
 ...
@@ -438,7 +442,7 @@ In all above examples we use method `toBrowser()` to send the file to browser fo
 |`toBase64()`|string|Return content of file in base64|
 |`saveAs($path)`||Save the file to specific location|
 
-__Examples:__
+Examples:
 
 ```
 $report->run()
